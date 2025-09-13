@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_executable(engine 
-    main.cpp
+add_executable(
+	engine 
+	main.cpp
+	GameEngine.cpp
 )
 
 target_compile_features(engine PRIVATE cxx_std_17)
