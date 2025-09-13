@@ -3,7 +3,6 @@
 GameEngine::GameEngine()
 	: m_isRunning(true)
 { 
-	Init();
 }
 
 void GameEngine::Init()
