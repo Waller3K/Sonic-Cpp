@@ -3,7 +3,6 @@
 GameEngine::GameEngine()
 	: m_isRunning(true)
 { 
-	Init();
 }
 
 void GameEngine::Init()
@@ -21,7 +20,6 @@ void GameEngine::Draw()
 	sf::CircleShape testShape(50, 3);
 	testShape.setPosition({(float)m_resolution.x/2, (float)m_resolution.y/2});
 	testShape.setFillColor(sf::Color::White);
-	testShape.setRotation(sf::degrees(m_testShapeAngle));
 	
 	m_window.draw(testShape);
 
@@ -33,7 +31,6 @@ void GameEngine::Update()
 	while(m_isRunning)
 	{
 
-		m_testShapeAngle += 0.1;
 
 		Draw();
 
