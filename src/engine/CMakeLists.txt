@@ -2,7 +2,14 @@ cmake_minimum_required(VERSION 3.28)
 
 add_executable(
 	engine 
+	Action.cpp
+	Action.hpp
+	Entity.cpp
+	Entity.hpp
+	Scene.cpp
+	Scene.hpp
 	main.cpp
+	GameEngine.hpp
 	GameEngine.cpp
 )
 

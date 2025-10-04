@@ -30,19 +30,26 @@ void GameEngine::Update()
 {
 	while(m_isRunning)
 	{
-
-
+		sUserInput();
 		Draw();
+	}
+}
 
-		//Checks to see if the window's x has been pressed.
-		while(const std::optional event = m_window.pollEvent())
+void GameEngine::sUserInput()
+{
+	//Checks to see if the window's x has been pressed.
+	while(const std::optional event = m_window.pollEvent())
+	{
+		if(event->is<sf::Event::Closed>())
 		{
-			if(event->is<sf::Event::Closed>())
-			{
-				m_window.close();
-				m_isRunning = false;
-			}
+			Quit();
 		}
 	}
-
 }
+
+void GameEngine::Quit()
+{
+	m_isRunning = false;
+	m_window.close();
+}
+
