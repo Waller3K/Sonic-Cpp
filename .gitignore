@@ -2,4 +2,7 @@
 /out
 /winBuild
 /.cache
+/.vscode
 .DS_Store
+compile_commands.json
+CMakePresets.json

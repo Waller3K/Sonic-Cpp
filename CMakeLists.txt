@@ -9,6 +9,14 @@ if(APPLE)
 	enable_language(OBJCXX)
 endif()
 
+FetchContent_Declare(Nlohmann_Json
+					GIT_REPOSITORY https://github.com/nlohmann/json.git
+					GIT_TAG v3.12.0
+					GIT_SHALLOW ON
+					EXCLUDE_FROM_ALL
+					SYSTEM)
+FetchContent_MakeAvailable(Nlohmann_Json)
+
 FetchContent_Declare(SFML
 				GIT_REPOSITORY https://github.com/SFML/SFML.git
 				GIT_TAG 3.0.1
@@ -47,9 +55,16 @@ add_subdirectory(src)
 
 target_compile_features(engine PRIVATE cxx_std_17)
 target_link_libraries(engine
-	PRIVATE
+	PUBLIC
 	SFML::Graphics
 	ImGui-SFML::ImGui-SFML
 	juce::juce_core
 	juce::juce_audio_basics
+	nlohmann_json::nlohmann_json
+)
+
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+target_link_libraries(${PROJECT_NAME} 
+	PRIVATE
+	engine
 )
