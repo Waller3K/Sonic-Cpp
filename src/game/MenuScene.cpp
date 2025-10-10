@@ -1,11 +1,14 @@
 #include <iostream>
 #include <SFML/Window.hpp>
+#include <imgui.h>
+#include <imgui-SFML.h>
 
 #include "MenuScene.hpp"
 #include "IDs.hpp"
 
 MenuScene::MenuScene(GameEngine* g)
-    : Scene(g)
+    :   Scene(g),
+        m_ImGuiToggle(true)
 {
 
 }
@@ -19,6 +22,12 @@ void MenuScene::init()
 void MenuScene::update()
 {
 
+    //ImGui Section
+    ImGui::ShowDemoWindow();
+
+    ImGui::Begin("Sonic C++", &m_ImGuiToggle);
+    ImGui::Button("Start Game!");
+    ImGui::End();
 }
 
 void MenuScene::onEnd()
@@ -29,8 +38,6 @@ void MenuScene::onEnd()
 void MenuScene::sRender()
 {
     m_game->window().clear(sf::Color::Blue);
-
-    m_game->window().display();
 }
 
 void MenuScene::sDoAction(Action a)

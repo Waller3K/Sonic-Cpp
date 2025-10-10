@@ -1,3 +1,6 @@
+#include <imgui.h>
+#include <imgui-SFML.h>
+
 #include "GameEngine.hpp"
 
 GameEngine::GameEngine()
@@ -20,6 +23,12 @@ void GameEngine::init(int defaultSceneID)
 
 	m_window.setFramerateLimit(180);
 
+	if(!ImGui::SFML::Init(m_window)){
+		std::cerr << "ImGui Failed to Initialize" << std::endl; 
+		quit();
+		return; 
+	}
+
 	setScene(defaultSceneID);
 
 	update();
@@ -28,10 +37,13 @@ void GameEngine::init(int defaultSceneID)
 void GameEngine::draw()
 {
 	currentScene()->sRender();
+	ImGui::SFML::Render(window());
+	window().display();
 }
 
 void GameEngine::setScene(int id)
 {
+
 	//Runs the onEnd function of the current scene if there is one
 	if(currentScene())
 	{
@@ -63,20 +75,33 @@ void GameEngine::update()
 	while(m_isRunning)
 	{
 		sUserInput();
+		ImGui::SFML::Update(window(), deltaTime());
 		currentScene()->update();
 		draw();
+		//Restarts the delta clock at the end of each frame, and stores the elapsed time in m_deltaTime
+		m_deltaTime = m_deltaClock.restart(); 
+
+		if(m_hasQuit)
+		{
+			quit();
+			return;
+		}
 	}
 }
 
 void GameEngine::sUserInput()
 {
-	//Checks to see if the window's x has been pressed.
+	
 	while(const std::optional event = m_window.pollEvent())
 	{
+		//Checks to see if the window's x has been pressed.
 		if(event->is<sf::Event::Closed>())
 		{
-			quit();
+			m_hasQuit = true;
+			return;
 		}
+
+		ImGui::SFML::ProcessEvent(window(), *event);
 
 		if(const auto& keyPressed = event->getIf<sf::Event::KeyPressed>())
 		{
@@ -112,12 +137,29 @@ void GameEngine::sUserInput()
 
 void GameEngine::quit()
 {
-	currentScene()->onEnd();
+
+	ImGui::SFML::Shutdown();
+	
+	if(currentScene())
+	{
+		currentScene()->onEnd();
+	}
 	m_isRunning = false;
+
 	m_window.close();
 }
 
 sf::RenderWindow& GameEngine::window()
 {
 	return m_window;
+}
+
+sf::Time GameEngine::currentTime()
+{
+	return m_timeElapsed.getElapsedTime();
+}
+
+sf::Time GameEngine::deltaTime()
+{
+	return m_deltaTime;
 }

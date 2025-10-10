@@ -25,8 +25,6 @@ void GameScene::onEnd()
 void GameScene::sRender()
 {
     m_game->window().clear(sf::Color::Red);
-
-    m_game->window().display();
 }
 
 void GameScene::sDoAction(Action a)

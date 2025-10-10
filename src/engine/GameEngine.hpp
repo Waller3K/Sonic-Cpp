@@ -14,7 +14,12 @@ class GameEngine
 	std::string									m_windowName	= "WallerEngine";
 	sf::Vector2u								m_resolution 	= {1080, 720};
 	sf::RenderWindow							m_window;
+	bool										m_hasQuit		= false;
 	bool										m_isRunning 	= false;
+	sf::Clock									m_timeElapsed;	//A Clock that will show the total time the game has been running
+	sf::Clock									m_deltaClock;	//A Clock that will be reset at the end of each frame
+	sf::Time									m_deltaTime		= sf::Time::Zero;	//The time it took for the last frame to complete
+
 
 public:
 
@@ -30,6 +35,8 @@ public:
 	void 					draw();
 	void 					quit();
 	sf::RenderWindow&		window();
+	sf::Time				currentTime();
+	sf::Time				deltaTime();
 
 
 };

@@ -5,6 +5,9 @@
 
 class MenuScene : public Scene
 {
+
+    bool    m_ImGuiToggle;
+
 public:
 
     MenuScene(GameEngine* g);
