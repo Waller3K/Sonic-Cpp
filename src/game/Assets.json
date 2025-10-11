@@ -1,6 +1,24 @@
 {
      "Textures": {
         "Default" : "Assets\\Default\\Null_Texture.png",
-        "Sonic" : "Assets\\Textures\\Sonic_Test.png"
+        "Sonic" : "Assets\\Textures\\Sonic_Test.png",
+        "SonicIdle" : "Assets\\Textures\\Sonic_Idle.png"
+     },
+     "Animations": {
+         "Default" : {
+            "Texture" : "Default",
+            "FrameCount" : 1,
+            "AnimSpd" : 1 
+         },
+         "TestAnim" : {
+            "Texture" : "Sonic",
+            "FrameCount" : 1,
+            "AnimSpd" : 1
+         },
+         "SonicIdle" : {
+            "Texture" : "SonicIdle",
+            "FrameCount" : 17,
+            "AnimSpd" : 1
+         }
      }
 }

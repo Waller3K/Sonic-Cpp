@@ -96,8 +96,8 @@ void Assets::initAssets(std::string path)
 					}
 				}
 
-				std::unique_ptr<Animation> a = std::make_unique<Animation>(animName, t, frameCount, animSpd);
-				addAnimation(animName, std::move(a)); //When dealing with unique pointers, we have to use std::move to transfer ownership
+				std::shared_ptr<Animation> a = std::make_shared<Animation>(animName, t, frameCount, animSpd);
+				addAnimation(animName, a);
 			}
 		}
 	}
@@ -125,10 +125,10 @@ void Assets::addTexture(const std::string& name, const std::string& path)
 	std::cout << "Loaded " << path << " successfully!" << std::endl;*/
 }
 
-void Assets::addAnimation(const std::string& name, std::unique_ptr<Animation> a)
+void Assets::addAnimation(const std::string& name, std::shared_ptr<Animation> a)
 {
 	std::cout << "Loaded Animation: " << a->getName() << " successfully!" << std::endl;
-	m_animations[name] = std::move(a);
+	m_animations[name] = a;
 }
 
 void Assets::addSoundBuffer(std::string& name, std::string& path)
@@ -200,14 +200,14 @@ sf::Texture& Assets::getTexture(const std::string& name)
 	return m_textures[name];*/
 }
 
-Animation& Assets::getAnimation(const std::string name)
+std::shared_ptr<Animation> Assets::getAnimation(const std::string name)
 {
 	if (m_animations.find(name) == m_animations.end()) 
 	{
 		std::cerr << "Animation " << name << " not found!" << std::endl;
-		return *(m_animations["Default"]);
+		return m_animations["Default"];
 	}
-	return *(m_animations[name]);
+	return m_animations[name];
 }
 
 sf::SoundBuffer Assets::getSoundBuffer(std::string name)

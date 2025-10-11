@@ -20,5 +20,7 @@ public:
     void onEnd();
     void sDoAction(Action a); 
     void sRender();
+    void sPlayerController();
+    void sAnimationUpdate();
 
 };

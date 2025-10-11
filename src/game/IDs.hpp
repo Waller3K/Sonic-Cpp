@@ -6,5 +6,9 @@ enum SceneIDs
 
 enum ActionIDs
 {
-    SWITCH_SCENES
+    SWITCH_SCENES,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
 };

@@ -31,13 +31,17 @@ class CAnimation : public Components
 {
 
 public:
-    std::unique_ptr<Animation> animation;
+    std::shared_ptr<Animation> animation;
     bool repeat = false;
-
+    int animSpd = 0;
+    bool isAnimated = false;
+    int iterator = 0;
 
     CAnimation(){}
-    CAnimation(std::unique_ptr<Animation> a, bool r)
-        :   animation(std::move(a)), repeat(r) {}
+    CAnimation(std::shared_ptr<Animation> a)
+        :   animation(a) {}
+    CAnimation(std::shared_ptr<Animation> a, bool r, int s)
+        :   animation(a), repeat(r), animSpd(s), isAnimated(true) {}
 
 };
 
@@ -47,6 +51,12 @@ class CPlayerController : public Components
 public:
 
     CPlayerController(){}
+    
+    //Temp Controls
+    bool up     = false;
+    bool down   = false;
+    bool left   = false;
+    bool right  = false;
 
 };
 
