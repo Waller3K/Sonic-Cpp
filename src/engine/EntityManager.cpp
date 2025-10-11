@@ -40,7 +40,7 @@ void EntityManager::removeDeadEntities(EntityVec& vec)
 }
 
 //A simple function that creates an entity with a given tag
-std::shared_ptr<Entity> EntityManager::addEntity(std::string& tag)
+std::shared_ptr<Entity> EntityManager::addEntity(std::string tag)
 {
 	auto e = std::shared_ptr<Entity>(new Entity(m_totalEntities++, tag));
 	//Instead of adding this entity to that first vector, we add it to the 'm_toAdd' vector instead

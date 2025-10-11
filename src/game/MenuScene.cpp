@@ -16,17 +16,19 @@ MenuScene::MenuScene(GameEngine* g)
 void MenuScene::init()
 {
     std::cout << "MenuScene!" << std::endl;
-    registerAction(static_cast<int>(sf::Keyboard::Key::Enter), static_cast<int>(ActionIDs::SWITCH_SCENES));
+    registerAction(static_cast<int>(sf::Keyboard::Key::Enter), ActionIDs::SWITCH_SCENES);
 }
 
 void MenuScene::update()
 {
 
     //ImGui Section
-    ImGui::ShowDemoWindow();
 
     ImGui::Begin("Sonic C++", &m_ImGuiToggle);
-    ImGui::Button("Start Game!");
+    if(ImGui::Button("Start Game!"))
+    {
+        m_game->setScene(SceneIDs::GAME);
+    }
     ImGui::End();
 }
 
@@ -46,8 +48,8 @@ void MenuScene::sDoAction(Action a)
     {
         return;
     }
-    if(a.getID() == static_cast<int>(ActionIDs::SWITCH_SCENES))
+    if(a.getID() == ActionIDs::SWITCH_SCENES)
     {
-        m_game->setScene(static_cast<int>(SceneIDs::GAME));
+        m_game->setScene(SceneIDs::GAME);
     }
 }

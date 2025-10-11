@@ -7,7 +7,11 @@
 #include "Components.hpp"
 
 typedef std::tuple<
-    CTransform
+    CTransform,
+    CAnimation,
+    CPlayerController,
+    CSlopeCollider,
+    CGravity
 > ComponentTuple;
 
 class EntityManager;

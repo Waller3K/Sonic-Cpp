@@ -1,10 +1,10 @@
-enum class SceneIDs
+enum SceneIDs
 {
     MENU,
     GAME
 };
 
-enum class ActionIDs
+enum ActionIDs
 {
     SWITCH_SCENES
 };

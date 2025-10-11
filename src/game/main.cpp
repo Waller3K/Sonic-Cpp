@@ -13,13 +13,13 @@ int main()
 
 	//Adds the menu Scene to the game engine's m_scenes vector with the correct ID
 	auto menuScene = std::make_shared<MenuScene>(&game);
-	game.addScene(static_cast<int>(SceneIDs::MENU), menuScene);
+	game.addScene(SceneIDs::MENU, menuScene);
 
 	auto gameScene = std::make_shared<GameScene>(&game);
-	game.addScene(static_cast<int>(SceneIDs::GAME), gameScene);
+	game.addScene(SceneIDs::GAME, gameScene);
 
 	//Initializes the game engine and sets the default scene to the MenuScene
-	game.init(static_cast<int>(SceneIDs::MENU));
+	game.init(SceneIDs::MENU);
 
 		
 	return 0;

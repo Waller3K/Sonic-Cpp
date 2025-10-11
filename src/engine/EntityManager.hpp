@@ -33,7 +33,7 @@ public:
 
     void removeDeadEntities(EntityVec& vec);
 
-    std::shared_ptr<Entity> addEntity(std::string& tag);
+    std::shared_ptr<Entity> addEntity(std::string tag);
 
 	EntityVec& getEntities();
 
