@@ -17,14 +17,19 @@ void GameScene::init()
     m_assets.initAssets("Assets.json");
 
     registerAction(static_cast<int>(sf::Keyboard::Key::Enter),  ActionIDs::SWITCH_SCENES);
-    registerAction(static_cast<int>(sf::Keyboard::Key::W),      ActionIDs::UP);
-    registerAction(static_cast<int>(sf::Keyboard::Key::S),      ActionIDs::DOWN);
-    registerAction(static_cast<int>(sf::Keyboard::Key::A),      ActionIDs::LEFT);
-    registerAction(static_cast<int>(sf::Keyboard::Key::D),      ActionIDs::RIGHT);
+    registerAction(static_cast<int>(sf::Keyboard::Key::Up),      ActionIDs::UP);
+    registerAction(static_cast<int>(sf::Keyboard::Key::Down),      ActionIDs::DOWN);
+    registerAction(static_cast<int>(sf::Keyboard::Key::Left),      ActionIDs::LEFT);
+    registerAction(static_cast<int>(sf::Keyboard::Key::Right),      ActionIDs::RIGHT);
+
+    //Initialized Camera View
+    m_camera = sf::View({240.0f, 135.0f}, {480.0f, 270.0f});
+
+    m_game->window().setView(m_camera);
 
     //Initialized Player Entity
     m_player = m_entityManager.addEntity("Player");
-    m_player->addComponent<CAnimation>(m_assets.getAnimation("SonicIdle"), true, 10);
+    m_player->addComponent<CAnimation>(m_assets.getAnimation("SonicIdle"), true, 20);
     m_player->addComponent<CTransform>(sf::Vector2f({ 100.f, 100.f }));
     m_player->addComponent<CPlayerController>();
 }
@@ -33,10 +38,18 @@ void GameScene::update()
 {
     m_entityManager.update();
     sPlayerController();
+    sAnimationUpdate();
 }
 
 void GameScene::onEnd()
 {
+    for(auto e : m_entityManager.getEntities())
+    {
+        e->distroy();
+    }
+
+    m_game->resetCamera();
+
     std::cout << "Switching Scenes!" << std::endl;
 }
 
@@ -201,6 +214,34 @@ void GameScene::sPlayerController()
         {
             e->getComponent<CTransform>().pos.x += 1;
         }
+
+    }
+}
+
+void GameScene::sAnimationUpdate()
+{
+    for(auto e : m_entityManager.getEntities())
+    {
+        if(!e->hasComponent<CAnimation>())
+        {
+            return;
+        }
+
+        if(!e->getComponent<CAnimation>().isAnimated)
+        {
+            return;
+        }
+
+        if(e->getComponent<CAnimation>().iterator < e->getComponent<CAnimation>().animSpd)
+        {
+            e->getComponent<CAnimation>().iterator++;
+        }
+        else
+        {
+            e->getComponent<CAnimation>().animation->update();
+            e->getComponent<CAnimation>().iterator = 0;
+        }
+        
 
     }
 }

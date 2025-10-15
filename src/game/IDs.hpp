@@ -12,3 +12,10 @@ enum ActionIDs
     LEFT,
     RIGHT
 };
+
+enum SonicAnimations
+{
+    SONIC_IDLE,
+    SONIC_RUN,
+    SONIC_JUMP
+};

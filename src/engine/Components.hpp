@@ -38,8 +38,11 @@ public:
     int iterator = 0;
 
     CAnimation(){}
+    //For Still Sprites
     CAnimation(std::shared_ptr<Animation> a)
         :   animation(a) {}
+
+    //For Animated Sprites
     CAnimation(std::shared_ptr<Animation> a, bool r, int s)
         :   animation(a), repeat(r), animSpd(s), isAnimated(true) {}
 

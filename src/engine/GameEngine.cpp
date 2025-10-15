@@ -23,6 +23,10 @@ void GameEngine::init(int defaultSceneID)
 
 	m_window.setFramerateLimit(180);
 
+	m_defaultCam = sf::View(sf::Vector2f{static_cast<float>(m_resolution.x/2), static_cast<float>(m_resolution.y/2)}, static_cast<sf::Vector2f>(m_resolution));
+
+	m_window.setView(m_defaultCam);
+
 	if(!ImGui::SFML::Init(m_window)){
 		std::cerr << "ImGui Failed to Initialize" << std::endl; 
 		quit();
@@ -87,6 +91,11 @@ void GameEngine::update()
 			return;
 		}
 	}
+}
+
+void GameEngine::resetCamera()
+{
+    m_window.setView(m_defaultCam);
 }
 
 void GameEngine::sUserInput()

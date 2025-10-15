@@ -14,6 +14,7 @@ class GameEngine
 	std::string									m_windowName	= "WallerEngine";
 	sf::Vector2u								m_resolution 	= {1080, 720};
 	sf::RenderWindow							m_window;
+	sf::View									m_defaultCam;
 	bool										m_hasQuit		= false;
 	bool										m_isRunning 	= false;
 	sf::Clock									m_timeElapsed;	//A Clock that will show the total time the game has been running
@@ -34,6 +35,7 @@ public:
 	std::shared_ptr<Scene>	currentScene();
 	void 					draw();
 	void 					quit();
+	void					resetCamera();
 	sf::RenderWindow&		window();
 	sf::Time				currentTime();
 	sf::Time				deltaTime();

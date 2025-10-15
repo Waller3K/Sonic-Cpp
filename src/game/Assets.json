@@ -1,8 +1,8 @@
 {
      "Textures": {
-        "Default" : "Assets\\Default\\Null_Texture.png",
-        "Sonic" : "Assets\\Textures\\Sonic_Test.png",
-        "SonicIdle" : "Assets\\Textures\\Sonic_Idle.png"
+        "Default" : "Assets/Default/Null_Texture.png",
+        "Sonic" : "Assets/Textures/Sonic_Test.png",
+        "SonicIdle" : "Assets/Textures/Sonic_Idle.png"
      },
      "Animations": {
          "Default" : {

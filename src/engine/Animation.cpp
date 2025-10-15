@@ -33,7 +33,15 @@ Animation::Animation(const std::string& name, const sf::Texture* t, size_t frame
 
 void Animation::update() 
 {
-	m_currentFrame++;
+	if(m_currentFrame < m_frameCount - 1)
+	{
+		m_currentFrame++;
+	}
+	else
+	{
+		m_currentFrame = 0;		
+	}
+	m_sprite.setTextureRect(sf::IntRect({ static_cast<int>(std::floor(m_currentFrame) * m_size.x), 0 }, { static_cast<int>(m_size.x), static_cast<int>(m_size.y) }));
 }
 
 const sf::Vector2f& Animation::getSize() const 

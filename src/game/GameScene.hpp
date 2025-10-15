@@ -10,6 +10,7 @@ class GameScene : public Scene
     EntityManager               m_entityManager;
     Assets                      m_assets;
     std::shared_ptr<Entity>     m_player;
+    sf::View                    m_camera;
 
 
 public:
