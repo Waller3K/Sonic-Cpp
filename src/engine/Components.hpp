@@ -19,6 +19,7 @@ public:
     sf::Vector2f    scale;
     sf::Vector2f    velocity;
     float           angle;
+    float           groundVel;
 
     CTransform(){}
     CTransform(const sf::Vector2f& p)

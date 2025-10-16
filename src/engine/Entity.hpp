@@ -21,7 +21,7 @@ class Entity
     friend class EntityManager;
 
     //Member Variables
-    bool            m_isActive;
+    bool            m_isActive = false;
     std::string     m_tag;
     size_t          m_id;
     ComponentTuple  m_components;

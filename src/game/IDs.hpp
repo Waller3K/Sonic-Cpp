@@ -7,10 +7,14 @@ enum SceneIDs
 enum ActionIDs
 {
     SWITCH_SCENES,
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
+    DEBUG_UP,
+    DEBUG_DOWN,
+    DEBUG_LEFT,
+    DEBUG_RIGHT,
+    CAMERA_UP,
+    CAMERA_DOWN,
+    CAMERA_LEFT,
+    CAMERA_RIGHT
 };
 
 enum SonicAnimations
