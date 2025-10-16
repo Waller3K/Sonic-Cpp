@@ -69,33 +69,49 @@ target_link_libraries(${PROJECT_NAME}
 	PRIVATE
 	engine
 )
+if(WIN32)
+	if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+		add_custom_target(CopyAssets ALL
+			COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${PROJECT_SOURCE_DIR}/src/game/Assets
+			${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/Assets
+			COMMENT "Copying Assets into DEBUG bianary directory! :3"
+		)
+		add_custom_target(CopyAssetsJson ALL
+			COMMAND ${CMAKE_COMMAND} -E copy
+			${PROJECT_SOURCE_DIR}/src/game/Assets.json
+			${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/
+			COMMENT "Copying Assets.json into DEBUG bianary directory! >:D"
+		)
+	elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+		add_custom_target(CopyAssets ALL
+			COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${PROJECT_SOURCE_DIR}/src/game/Assets
+			${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Assets
+			COMMENT "Copying Assets into RELEASE bianary directory! :3"
+		)
+		add_custom_target(CopyAssetsJson ALL
+			COMMAND ${CMAKE_COMMAND} -E copy
+			${PROJECT_SOURCE_DIR}/src/game/Assets.json
+			${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/
+			COMMENT "Copying Assets.json into RELEASE bianary directory! >:D"
+		)
+	endif()
+else()
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 	add_custom_target(CopyAssets ALL
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
 		${PROJECT_SOURCE_DIR}/src/game/Assets
-		${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/Assets
-		COMMENT "Copying Assets into DEBUG bianary directory! :3"
+		${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Assets
+		COMMENT "Copying Assets into bianary directory! :3"
 	)
 	add_custom_target(CopyAssetsJson ALL
 		COMMAND ${CMAKE_COMMAND} -E copy
 		${PROJECT_SOURCE_DIR}/src/game/Assets.json
-		${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/
-		COMMENT "Copying Assets.json into DEBUG bianary directory! >:D"
+		${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/
+		COMMENT "Copying Assets.json into bianary directory! >:D"
 	)
-elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-	add_custom_target(CopyAssets ALL
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-		${PROJECT_SOURCE_DIR}/src/game/Assets
-		${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Assets
-		COMMENT "Copying Assets into RELEASE bianary directory! :3"
-	)
-	add_custom_target(CopyAssetsJson ALL
-		COMMAND ${CMAKE_COMMAND} -E copy
-		${PROJECT_SOURCE_DIR}/src/game/Assets.json
-		${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/
-		COMMENT "Copying Assets.json into RELEASE bianary directory! >:D"
-	)
+
 endif()
 
 add_dependencies(${PROJECT_NAME} CopyAssets CopyAssetsJson)
